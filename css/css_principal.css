@@ -1,0 +1,116 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 1/08/2018, 11:42:01 AM
+    Author     : BOAA01
+*/
+#pieChart {    
+	position:absolute;
+	top:10px;
+	left:10px;
+	width:200px;
+	height: 200px; 
+}
+#pieChart_fijo {    
+	position:absolute;
+	top:320px;
+	left:10px;
+	width:300px;
+	height: 300px; 
+}
+#lineChart_fijo {    
+	position:absolute;
+	top:10px;
+	left:830px;
+	width:500px;
+	height: 300px;
+}
+
+#lineChart {    
+	position:absolute;
+	top:10px;
+	left:320px;
+	width:400px;
+	height: 300px;
+}
+
+#barChart_integracion {
+	position:absolute;
+	top:320px;
+	left:53px;
+	height: 280px;
+}
+
+#barChart_proceso {
+	position:absolute;
+	top:480px;
+	left:53px;
+	height: 280px;
+}
+
+#barChart_causas {
+	position:absolute;
+	top:480px;
+	left:10px;
+}
+
+.slice {
+   font-size: 12pt;
+   font-family: Verdana;
+   fill: white; //svg specific - instead of color
+   font-weight: bold;	
+  		} 
+/*for line chart*/
+.axis path, .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges; //The shape-rendering property is an SVG attribute, used here to make sure our axis and its tick mark lines are pixel-perfect. 
+}
+.line {
+  fill: none;
+  /*stroke: steelblue;*/
+  stroke-width: 3px;
+}
+.dot {
+  /*fill: white;*/
+  /*stroke: steelblue;*/
+  stroke-width: 1.5px;
+  }
+.axis text {
+    font-family: Verdana;
+    font-size: 9px;
+}
+.title {
+	 font-family: Verdana;
+    font-size: 10px;	
+		
+}
+.xAxis {
+    font-family: verdana;
+    font-size: 11px;
+    fill: black;
+}  
+.yAxis {
+    font-family: verdana;
+    font-size: 11px;
+    fill: white;
+}
+#lineChartTitle1 {
+	font-family: Verdana;
+	font-size  : 14px;
+	fill       : lightgrey;
+	font-weight: bold;
+	text-anchor: middle;
+}
+#lineChartTitle2 {
+	font-family: Verdana;
+	font-size  : 72px;
+	fill       : grey;
+	text-anchor: middle;
+	font-weight: bold;
+	/*font-style: italic;*/
+}
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>    
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <link rel="STYLESHEET" type="text/css" href="../css/css_principal.css">
+    <title>Logistica Reporte Semanal</title>
+
+    <!--<script src="http://d3js.org/d3.v2.js"></script>-->
+    
+    <script src="../js/d3_v2.js" type="text/javascript"></script>
+    <script src="../js/pie.js" type="text/javascript"></script>
+    <script src="../js/bar.js" type="text/javascript"></script>
+    <script src="../js/line.js" type="text/javascript"></script>    
+     <script src="../js/line_fija.js" type="text/javascript"></script>
+     <script src="../js/bar_causas.js" type="text/javascript"></script>
+  </head>
+  <body>
+
+      
+    <div id="lineChart_fijo"></div>    
+    <div id="pieChart"></div>
+    <!--<div id="barChart_integracion"></div> 
+     <div id="barChart_proceso"></div> -->
+    
+     <div id="barChart_causas"></div> 
+     
+    <div id="lineChart"></div>       
+    <div id="Controles">
+    </div> 
+    <script type="text/javascript">  
+        /*FORMATOS*/
+        var 	formatAsPercentage = d3.format("%"),
+                        formatAsPercentage1Dec = d3.format(".1%"),
+                        formatAsInteger = d3.format(","),
+                        fsec = d3.time.format("%S s"),
+                        fmin = d3.time.format("%M m"),
+                        fhou = d3.time.format("%H h"),
+                        fwee = d3.time.format("%a"),
+                        fdat = d3.time.format("%d d"),
+                        fmon = d3.time.format("%b")
+                        ;               
+        dsPieChart();        
+        /*var seccion_integracion = "#barChart_proceso";
+        var sub = "proceso";
+        var archivo = "../data/CodesResolution.csv";
+        dsBarChart(seccion_integracion, sub, archivo);
+        var seccion_integracion = "#barChart_integracion";
+        var sub = "integracion";
+        dsBarChart(seccion_integracion, sub, archivo);*/           
+        bar_causas();        
+        dsLineChart_fijo();
+        dsLineChart();
+        
+        
+         
+    </script>
+  </body>
+</html>
