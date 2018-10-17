@@ -42,6 +42,7 @@ function bar_causas(){
         var plot = svg.append("g")
                     .attr("class", "cont")
 		    ;
+                    
         
         //barras
         plot.selectAll("rect")
@@ -66,19 +67,20 @@ function bar_causas(){
 	    .attr("x", function(d) {return(xScale(d.measure/2));})
 	    .attr("y", function(d, i) { return (i * (height / firstDatasetBarChart_filter.length + barPadding)+ (height / firstDatasetBarChart_filter.length - barPadding));})
 	    .attr("class", "yAxis_causa")
-            .style("font-size", (height / firstDatasetBarChart_filter.length))
-            .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + 13  + ")")
+            .style("font-size", (height / firstDatasetBarChart_filter.length - barPadding))
+            .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + 10  + ")")
             .style("fill","black")
             
     ;
     
-    var xLabels = svg.append("g")
+    
+    var yLabels = svg.append("g")
 		     //.attr("transform", "translate(" + 0 + "," + margin.top  + ")")
-                     .attr("id","ejex")
+                     .attr("id","ejey")
 		    ;
     
          //leyendas de cada barra--> ejemplo Datos Comerciales
-    xLabels.selectAll("text.xAxis")
+    yLabels.selectAll("text.xAxis")
 		  .data(firstDatasetBarChart_filter)
 		  .enter()
 		  .append("text")
@@ -87,7 +89,9 @@ function bar_causas(){
                   .attr("y", function(d, i) { return  (i * (height / firstDatasetBarChart_filter.length + barPadding)) + (height / firstDatasetBarChart_filter.length - barPadding);})
 		  .attr("transform", "translate(" + 0 + "," + 13 + ")")
 		  .attr("class", "xaxis_causa")
-                  .style("font-size", (height / firstDatasetBarChart_filter.length));	
+                  .style("font-size", "13px");	
+          
+    
                     
     });
 }
@@ -150,7 +154,7 @@ function update_causas(group, colorChosen, archivo) {
       //actualizo labels de barras
       var labelsy = d3.select("#barChartPlot_causas").selectAll(".xaxis_causa").data(datos_filtrados);
       labelsy.text(function(d) { return d.causa;})
-             .attr("transform", "translate(" + 0 + "," + 13 + ")");
+             .attr("transform", "translate(" + 0 + "," + 0 + ")");
   
   
       var labelsx = d3.select("#barChartPlot_causas").selectAll(".yAxis_causa").data(datos_filtrados);
@@ -160,15 +164,14 @@ function update_causas(group, colorChosen, archivo) {
               .attr("x", function(d) {return(xScale(d.measure/2));})
               .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + 13  + ")")
          ;
-      
-});
+    });
 }
 
 function BarChartBasics() {
         
 		var margin = {top: 30, right: 50, bottom: 20, left: 10},
 		width = 800  - margin.left - margin.right,
-	         height = 150 - margin.top - margin.bottom,
+	         height = 280 - margin.top - margin.bottom,
 		colorBar = d3.scale.category20(),
 		barPadding = 5
 		;
