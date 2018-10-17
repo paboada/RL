@@ -54,7 +54,6 @@ function bar_causas(){
 		   .attr("y", function(d, i) { return  (i * (height / firstDatasetBarChart_filter.length + barPadding)) + (height / firstDatasetBarChart_filter.length - barPadding);} ) 
                    .attr("height",(height / firstDatasetBarChart_filter.length - barPadding))
                    .attr("fill", "lightgrey")
-                   //.attr("transform", "translate(" + 0 + "," + -8 + ")")
                    .attr("class", "rect_causa")
 		   ;
         
@@ -68,7 +67,7 @@ function bar_causas(){
 	    .attr("y", function(d, i) { return (i * (height / firstDatasetBarChart_filter.length + barPadding)+ (height / firstDatasetBarChart_filter.length - barPadding));})
 	    .attr("class", "yAxis_causa")
             .style("font-size", (height / firstDatasetBarChart_filter.length - barPadding))
-            .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + 10  + ")")
+            .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + margin.top/2  + ")")
             .style("fill","black")
             
     ;
@@ -87,7 +86,7 @@ function bar_causas(){
 		  .text(function(d) { return d.causa;})
                   .attr("x",0)
                   .attr("y", function(d, i) { return  (i * (height / firstDatasetBarChart_filter.length + barPadding)) + (height / firstDatasetBarChart_filter.length - barPadding);})
-		  .attr("transform", "translate(" + 0 + "," + 13 + ")")
+		  .attr("transform", "translate(" + 0 + "," + margin.top/2 + ")")
 		  .attr("class", "xaxis_causa")
                   .style("font-size", "13px");	
           
@@ -112,7 +111,7 @@ function update_causas(group, colorChosen, archivo) {
         var datos_sin_fitro = datos;
                 //console.log(datos);
 		var datos_filtrados = datasetBarChosen(group,datos_sin_fitro );
-                console.log(datos_filtrados);
+                //console.log(datos_filtrados);
                  
                var max_long_palabra = max_lon_causa(datos_filtrados);
                
@@ -147,23 +146,21 @@ function update_causas(group, colorChosen, archivo) {
                    .attr("x", letter_scale(max_long_palabra))
 		   .attr("width", function(d) {return(xScale(d.measure/2));})
                    .attr("fill", colorChosen)
-                   .attr("transform", "translate(" + 0 + "," + -15 + ")")
-           
 		   ;
-         
-             
-      //actualizo labels de barras
+       
+      //actualizo categorias de barras
       var labelsy = d3.select("#barChartPlot_causas").selectAll(".xaxis_causa").data(datos_filtrados);
       labelsy.text(function(d) { return d.causa;})
-             .attr("transform", "translate(" + 0 + "," + 0 + ")");
+             
+     ;
   
-  
+      //numeros de las barras
       var labelsx = d3.select("#barChartPlot_causas").selectAll(".yAxis_causa").data(datos_filtrados);
        labelsx.transition()
 	      .duration(750)
               .text(function(d) { return d.measure;})
               .attr("x", function(d) {return(xScale(d.measure/2));})
-              .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + 0  + ")")
+              .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + margin.top/2 + ")")
          ;
     });
 }
@@ -174,7 +171,7 @@ function BarChartBasics() {
 		width = 800  - margin.left - margin.right,
 	         height = 280 - margin.top - margin.bottom,
 		colorBar = d3.scale.category20(),
-		barPadding = 5
+		barPadding = 3
 		;
 		
 		return {
