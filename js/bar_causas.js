@@ -54,7 +54,7 @@ function bar_causas(){
 		   .attr("y", function(d, i) { return  (i * (height / firstDatasetBarChart_filter.length + barPadding)) + (height / firstDatasetBarChart_filter.length - barPadding);} ) 
                    .attr("height",(height / firstDatasetBarChart_filter.length - barPadding))
                    .attr("fill", "lightgrey")
-                   //.attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + 0 + ")")
+                   //.attr("transform", "translate(" + 0 + "," + -8 + ")")
                    .attr("class", "rect_causa")
 		   ;
         
@@ -112,7 +112,7 @@ function update_causas(group, colorChosen, archivo) {
         var datos_sin_fitro = datos;
                 //console.log(datos);
 		var datos_filtrados = datasetBarChosen(group,datos_sin_fitro );
-                //console.log(datos_filtrados);
+                console.log(datos_filtrados);
                  
                var max_long_palabra = max_lon_causa(datos_filtrados);
                
@@ -147,6 +147,7 @@ function update_causas(group, colorChosen, archivo) {
                    .attr("x", letter_scale(max_long_palabra))
 		   .attr("width", function(d) {return(xScale(d.measure/2));})
                    .attr("fill", colorChosen)
+                   .attr("transform", "translate(" + 0 + "," + -15 + ")")
            
 		   ;
          
@@ -162,7 +163,7 @@ function update_causas(group, colorChosen, archivo) {
 	      .duration(750)
               .text(function(d) { return d.measure;})
               .attr("x", function(d) {return(xScale(d.measure/2));})
-              .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + 13  + ")")
+              .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + 0  + ")")
          ;
     });
 }
@@ -191,9 +192,9 @@ function max_lon_causa(datos_filtrados){
                                    //console.log(d.causa + " mide " + d.causa.length)
                                    return d.causa.length; 
                                    })
-    //console.log("maximo valor para la palabra" + maxima);
-    console.log(document.getElementById("ejex"))
-  var a = document.getElementById("ejex");
+    console.log("maximo valor para la palabra " + maxima);
+    //console.log(document.getElementById("ejex"))
+  //var a = document.getElementById("ejex");
     return maxima;
     
     
