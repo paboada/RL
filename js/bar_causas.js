@@ -22,15 +22,11 @@ function bar_causas(){
         var letter_scale = d3.scale.linear().domain([0,max_long_palabra]).range([0, width/2]);
                         
         var xScale = d3.scale.linear()
-			   .domain([0,d3.max(firstDatasetBarChart_filter, function(d) { 
+			   .domain([0,d3.max(firstDatasetBarChart, function(d) { 
                                    return parseInt(d.measure)  
                                    })])
 			   .range([0, width]);
                    
-        var yScale = d3.scale.linear()
-		       .domain([0,firstDatasetBarChart_filter.length])
-		       .range([0,height])
-		   ;
         //Create SVG element	
 	var svg = d3.select("#barChart_causas")
 		    .append("svg")
@@ -133,7 +129,7 @@ function update_causas(group, colorChosen, archivo) {
          //console.log(d3.select("#barChartPlot_causas").select(".ejex"));
          
         var xScale = d3.scale.linear()
-			   .domain([0,d3.max(datos_filtrados, function(d) { 
+			   .domain([0,d3.max(datos_sin_fitro, function(d) { 
                                    return parseInt(d.measure)  
                                    })])
 			   .range([0, width]);
