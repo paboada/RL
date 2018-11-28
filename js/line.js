@@ -56,12 +56,12 @@ function dsLineChart() {
 	  	 .enter().append("circle")
 	    .attr("class", "dot")
 	    //.attr("stroke", function (d) { return d.measure==datasetMeasureMin ? "red" : (d.measure==datasetMeasureMax ? "green" : "steelblue") } )
-	    .attr("fill", function (d) { return d.measure==d3.min(firstDatasetLineChart, function(d) { return d.measure; }) ? "blue" : (d.measure==d3.max(firstDatasetLineChart, function(d) { return d.measure; }) ? "red" : "white") } )
+	    .attr("fill",function (d) {  return parseInt(d.measure)===d3.min(firstDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "green" : (parseInt(d.measure)===d3.max(firstDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "red" : "white") } )
 	    //.attr("stroke-width", function (d) { return d.measure==datasetMeasureMin || d.measure==datasetMeasureMax ? "3px" : "1.5px"} )
 	    .attr("cx", line.x())
 	    .attr("cy", line.y())
 	    .attr("r", 3.5)
-            .attr("r", function (d) { return d.measure==d3.min(firstDatasetLineChart, function(d) { return d.measure; }) ? "6" : (d.measure==d3.max(firstDatasetLineChart, function(d) { return d.measure; }) ? "6" : "3.5") } )
+            .attr("r", function (d) { return parseInt(d.measure)===d3.min(firstDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "6" : (parseInt(d.measure)===d3.max(firstDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "6" : "2") } )
 	    .attr("stroke", "lightgrey")
             .attr("transform", "translate(" + 0 + "," + -margin.top + ")")
 	    .append("title")
@@ -186,8 +186,8 @@ function updateLineChart(group, colorChosen) {
 	    .duration(750)
             .attr("cy",function(d) { //console.log(d.measure);
                                     return yScale(d.measure); })
-            .attr("fill", function (d) { return d.measure==d3.min(currentDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "blue" : (d.measure==d3.max(currentDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "red" : "white") } )
-            .attr("r", function (d) { return d.measure==d3.min(currentDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "6" : (d.measure==d3.max(currentDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "6" : "3.5") } );
+            .attr("fill", function (d) {  return parseInt(d.measure)===d3.min(currentDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "green" : (parseInt(d.measure)===d3.max(currentDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "red" : "white") } )
+            .attr("r", function (d) { return parseInt(d.measure)===d3.min(currentDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "6" : (parseInt(d.measure)===d3.max(currentDatasetLineChart, function(d) { return parseInt(d.measure); }) ? "6" : "2") } )
      
 
           
