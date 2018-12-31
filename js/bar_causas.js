@@ -179,7 +179,9 @@ function update_causas(group, colorChosen, archivo) {
       //exit
       labelsy.exit().remove();
       //update
-      labelsy.text(function(d) { return d.causa;}) //a los nuevos elementos se debe actualizar todo, los viejos tienen los attr viejos pero los nuevos tienen por defecto
+      labelsy.transition()
+             .duration(750)
+             .text(function(d) { return d.causa;}) //a los nuevos elementos se debe actualizar todo, los viejos tienen los attr viejos pero los nuevos tienen por defecto
              .attr("x",0)
              .attr("y", function(d, i) { return  (i * (height / parseInt(data_causa.length) + barPadding)) + (height / parseInt(data_causa.length) - barPadding);})
              .attr("transform", "translate(" + 0 + "," + margin.top/2 + ")")
