@@ -7,7 +7,7 @@ function bar_causas(){
         //console.log(firstDatasetBarChart);    
         var group = "All";
         var firstDatasetBarChart_filter = datasetBarChosen(group, firstDatasetBarChart); 
-        //console.log(firstDatasetBarChart_filter);
+        
 	var basics = BarChartBasics();
 	var max_long_palabra = max_lon_causa(firstDatasetBarChart_filter);
         console.log(max_long_palabra);
@@ -68,6 +68,7 @@ function bar_causas(){
             
     ;
     
+    console.log(firstDatasetBarChart_filter.length);
     
     var yLabels = svg.append("g")
 		     //.attr("transform", "translate(" + 0 + "," + margin.top  + ")")
@@ -105,7 +106,9 @@ function update_causas(group, colorChosen, archivo) {
      d3.csv(archivo, function(datos){  
         console.log("Iniciando ACTUALIZACION update_causas");
         var datos_sin_fitro = datos;
-                //console.log(datos);
+        var group_causa = "All";
+        var data_causa = datasetBarChosen(group_causa, datos_sin_fitro);
+                
 		var datos_filtrados = datasetBarChosen(group,datos_sin_fitro );
                 //console.log(datos_filtrados);
                  
@@ -133,30 +136,75 @@ function update_causas(group, colorChosen, archivo) {
                                    return parseInt(d.measure)  
                                    })])
 			   .range([0, width]);
-                  
-         d3.select("#barChartPlot_causas")
-             .selectAll(".rect_causa")
-		   .data(datos_filtrados)
-		   .transition()
-	           .duration(750)
-                   .attr("x", letter_scale(max_long_palabra))
-		   .attr("width", function(d) {return(xScale(d.measure/2));})
-                   .attr("fill", colorChosen)
-		   ;
+         
+         /*console.log("Datos VIZ actuales");
+         console.log(d3.select("#barChartPlot_causas").selectAll(".rect_causa"));
+         console.log("Mapeados con")
+         console.log(datos_filtrados);*/
+         
+         
+         //BARRAS
+         var barras = d3.select("#barChartPlot_causas").select(".cont")  //g que contiene los elementos
+                        .selectAll(".rect_causa")      //rect bar
+                        .data(datos_filtrados);
+                
+        /*console.log("Resultado")
+        console.log(barras); */
+        //enter
+        barras.enter()
+              .append("rect")
+              .attr("x", 0)
+              .attr("width",0)   
+	      .attr("y",0) 
+              .attr("height",0)
+              .attr("class", "rect_causa");
+        //exit
+        barras.exit().remove();        
+        //update      
+        barras.attr("x", letter_scale(max_long_palabra))
+              .attr("y", function(d, i) { return  (i * (height / parseInt(data_causa.length) + barPadding)) + (height / parseInt(data_causa.length) - barPadding);} ) 
+              .transition()
+              .duration(1000)
+              .attr("width", function(d) {return(xScale(d.measure/2));})
+              .attr("height",(height / parseInt(data_causa.length) - barPadding)) //los nuevos elementos no tienen estas propiedades, y los viejos son de los datos anteriores
+              .attr("fill", colorChosen); 
+        
        
-      //actualizo categorias de barras
-      var labelsy = d3.select("#barChartPlot_causas").selectAll(".xaxis_causa").data(datos_filtrados);
-      labelsy.text(function(d) { return d.causa;})
-             
-     ;
+      //CATEGORIAS BARRAS
+      var labelsy = d3.select("#barChartPlot_causas")
+                      .selectAll(".xaxis_causa")
+                      .data(datos_filtrados);
+      //enter
+      labelsy.enter().append("text").attr("class","xaxis_causa");
+      //exit
+      labelsy.exit().remove();
+      //update
+      labelsy.text(function(d) { return d.causa;}) //a los nuevos elementos se debe actualizar todo, los viejos tienen los attr viejos pero los nuevos tienen por defecto
+             .attr("x",0)
+             .attr("y", function(d, i) { return  (i * (height / parseInt(data_causa.length) + barPadding)) + (height / parseInt(data_causa.length) - barPadding);})
+             .attr("transform", "translate(" + 0 + "," + margin.top/2 + ")")
+             .style("font-size", "13px");
   
       //numeros de las barras
-      var labelsx = d3.select("#barChartPlot_causas").selectAll(".yAxis_causa").data(datos_filtrados);
-       labelsx.transition()
-	      .duration(750)
-              .text(function(d) { return d.measure;})
-              .attr("x", function(d) {return(xScale(d.measure/2));})
-              .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + margin.top/2 + ")")
+      var labelsx = d3.select("#barChartPlot_causas")
+                      .selectAll(".yAxis_causa")
+                      .data(datos_filtrados);
+      //enter
+      labelsx.enter().append("text").attr("class","yAxis_causa");
+      //exit
+      labelsx.exit().remove();
+      //update
+      console.log(letter_scale(max_long_palabra) + " " + margin.top/2);
+      labelsx.transition()
+                .duration(750)
+                .text(function(d) {return formatAsInteger(d3.round(d.measure));})
+                .attr("x", function(d) {return(xScale(d.measure/2));})
+                .attr("y", function(d, i) { return (i * (height / parseInt(data_causa.length) + barPadding)+ (height / parseInt(data_causa.length) - barPadding));})
+                .attr("class", "yAxis_causa")
+                .style("font-size", (height / parseInt(data_causa.length) - barPadding))
+                .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + margin.top/2  + ")")
+                .style("fill","black")
+      
          ;
     });
 }
