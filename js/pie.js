@@ -126,7 +126,9 @@ function dsPieChart(){
                            
                            //actualizar causas
                            var archivo = "../data/Causales.csv";
-                           update_causas(d.data.category, color(i), archivo)
+                           update_causas(d.data.category, color(i), archivo);
+                           var archivo2 = "../data/Elementos.csv";
+                           update_causas_elementos(d.data.category, color(i), archivo2);
                            
 			 
 	}

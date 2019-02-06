@@ -1,14 +1,14 @@
-function bar_causas(){
+function bar_elementos(){
     //console.log("Comienza bar causas");
-     d3.csv("../data/Causales.csv", function(datos){
-         console.log("Iniciando funcion dsBarChart");    
+     d3.csv("../data/Elementos.csv", function(datos){
+         console.log("Iniciando funcion bar_elementos");    
         var firstDatasetBarChart = datos;
         //console.log("Datos Cargados");
         //console.log(firstDatasetBarChart);    
-        var group = "All";
-        var firstDatasetBarChart_filter = datasetBarChosen(group, firstDatasetBarChart); 
         
-	var basics = BarChartBasics();
+        var group = "All";
+        var firstDatasetBarChart_filter = datasetBarChosen(group, firstDatasetBarChart);        
+	var basics = BarChartBasics_elementos();
 	var max_long_palabra = max_lon_causa(firstDatasetBarChart_filter);
         console.log(max_long_palabra);
 	var margin = basics.margin,
@@ -18,7 +18,9 @@ function bar_causas(){
 		barPadding = basics.barPadding
 		;
         
-        var par_mover_num_barras = 1.4;
+        //mover posicion numeros y barras
+         var par_mover_num_barras = 1.6;
+         
         var letter_scale = d3.scale.linear().domain([0,max_long_palabra]).range([0, width/par_mover_num_barras]);
                         
         var xScale = d3.scale.linear()
@@ -28,15 +30,15 @@ function bar_causas(){
 			   .range([0, width]);
                    
         //Create SVG element	
-	var svg = d3.select("#barChart_causas")
+	var svg = d3.select("#bar_elementos")
 		    .append("svg")
 		    .attr("width", width + margin.left + margin.right)
 		    .attr("height", height + margin.top + margin.bottom)
-		    .attr("id","barChartPlot_causas")
+		    .attr("id","barChartPlot_elementos")
 		    ;
         
         var plot = svg.append("g")
-                    .attr("class", "cont")
+                    .attr("class", "cont_elementos")
 		    ;
                     
         
@@ -50,7 +52,7 @@ function bar_causas(){
 		   .attr("y", function(d, i) { return  (i * (height / firstDatasetBarChart_filter.length + barPadding)) + (height / firstDatasetBarChart_filter.length - barPadding);} ) 
                    .attr("height",(height / firstDatasetBarChart_filter.length - barPadding))
                    .attr("fill", "lightgrey")
-                   .attr("class", "rect_causa")
+                   .attr("class", "rect_elemento")
 		   ;
         
         //texto para numeros de barras
@@ -61,7 +63,7 @@ function bar_causas(){
 	    .text(function(d) {return formatAsInteger(d3.round(d.measure));})
 	    .attr("x", function(d) {return(xScale(d.measure/2));})
 	    .attr("y", function(d, i) { return (i * (height / firstDatasetBarChart_filter.length + barPadding)+ (height / firstDatasetBarChart_filter.length - barPadding));})
-	    .attr("class", "yAxis_causa")
+	    .attr("class", "yAxis_elemento")
             .style("font-size", (height / firstDatasetBarChart_filter.length - barPadding))
             .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + margin.top/2  + ")")
             .style("fill","black")
@@ -72,7 +74,7 @@ function bar_causas(){
     
     var yLabels = svg.append("g")
 		     //.attr("transform", "translate(" + 0 + "," + margin.top  + ")")
-                     .attr("id","ejey")
+                     .attr("id","ejey_elemento")
 		    ;
     
          //leyendas de cada barra--> ejemplo Datos Comerciales
@@ -84,7 +86,7 @@ function bar_causas(){
                   .attr("x",0)
                   .attr("y", function(d, i) { return  (i * (height / firstDatasetBarChart_filter.length + barPadding)) + (height / firstDatasetBarChart_filter.length - barPadding);})
 		  .attr("transform", "translate(" + 0 + "," + margin.top/2 + ")")
-		  .attr("class", "xaxis_causa")
+		  .attr("class", "xaxis_elemento")
                   .style("font-size", "13px");	
           
     
@@ -101,14 +103,13 @@ function datasetBarChosen(group, firstDatasetBarChart) {
 }
 
 
-function update_causas(group, colorChosen, archivo) {
+function update_causas_elementos(group, colorChosen, archivo) {
     
      d3.csv(archivo, function(datos){  
          
-         //mover posicion numeros y barras
-         var par_mover_num_barras = 1.4;
-                 
-        console.log("Iniciando ACTUALIZACION update_causas");
+        
+         
+        console.log("Iniciando ACTUALIZACION update_causas_elementos");
         var datos_sin_fitro = datos;
         var group_causa = "All";
         var data_causa = datasetBarChosen(group_causa, datos_sin_fitro);
@@ -127,6 +128,8 @@ function update_causas(group, colorChosen, archivo) {
 			barPadding = basics.barPadding
 			;
         
+        //mover posicion numeros y barras
+         var par_mover_num_barras = 9;
          //console.log(d3.max(datos_filtrados, function(d) { //console.log(d.measure); return d.measure }));
          var letter_scale = d3.scale.linear().domain([0,max_long_palabra]).range([0, width/par_mover_num_barras]);
          
@@ -148,8 +151,8 @@ function update_causas(group, colorChosen, archivo) {
          
          
          //BARRAS
-         var barras = d3.select("#barChartPlot_causas").select(".cont")  //g que contiene los elementos
-                        .selectAll(".rect_causa")      //rect bar
+         var barras = d3.select("#barChartPlot_elementos").select(".cont_elementos")  //g que contiene los elementos
+                        .selectAll(".rect_elemento")      //rect bar
                         .data(datos_filtrados);
                 
         /*console.log("Resultado")
@@ -161,26 +164,26 @@ function update_causas(group, colorChosen, archivo) {
               .attr("width",0)   
 	      .attr("y",0) 
               .attr("height",0)
-              .attr("class", "rect_causa");
+              .attr("class", "rect_elemento");
         //exit
         barras.exit().remove();        
-        //update      
+        //update   
+        console.log("aquiii" + max_long_palabra);
         barras.attr("x", letter_scale(max_long_palabra))
               .attr("y", function(d, i) { return  (i * (height / parseInt(data_causa.length) + barPadding)) + (height / parseInt(data_causa.length) - barPadding);} ) 
               .transition()
               .duration(1000)
               .attr("width", function(d) {return(xScale(d.measure/7));})
               .attr("height",(height / parseInt(data_causa.length) - barPadding)) //los nuevos elementos no tienen estas propiedades, y los viejos son de los datos anteriores
-              .attr("fill", colorChosen)
-              ; 
+              .attr("fill", colorChosen); 
         
        
       //CATEGORIAS BARRAS
-      var labelsy = d3.select("#barChartPlot_causas")
-                      .selectAll(".xaxis_causa")
+      var labelsy = d3.select("#barChartPlot_elementos")
+                      .selectAll(".xaxis_elemento")
                       .data(datos_filtrados);
       //enter
-      labelsy.enter().append("text").attr("class","xaxis_causa");
+      labelsy.enter().append("text").attr("class","xaxis_elemento");
       //exit
       labelsy.exit().remove();
       //update
@@ -193,33 +196,32 @@ function update_causas(group, colorChosen, archivo) {
              .style("font-size", "13px");
   
       //numeros de las barras
-      var labelsx = d3.select("#barChartPlot_causas")
-                      .selectAll(".yAxis_causa")
+      var labelsx = d3.select("#barChartPlot_elementos")
+                      .selectAll(".yAxis_elemento")
                       .data(datos_filtrados);
       //enter
-      labelsx.enter().append("text").attr("class","yAxis_causa");
+      labelsx.enter().append("text").attr("class","yAxis_elemento");
       //exit
       labelsx.exit().remove();
       //update
-      console.log(letter_scale(max_long_palabra) + " " + margin.top/2);
       labelsx.transition()
                 .duration(750)
                 .text(function(d) {return formatAsInteger(d3.round(d.measure));})
                 .attr("x", function(d) {return(xScale(d.measure/7));})
                 .attr("y", function(d, i) { return (i * (height / parseInt(data_causa.length) + barPadding)+ (height / parseInt(data_causa.length) - barPadding));})
-                .attr("class", "yAxis_causa")
+                .attr("class", "yAxis_elemento")
                 .style("font-size", (height / parseInt(data_causa.length) - barPadding))
-                .attr("transform", "translate(" + (letter_scale(max_long_palabra)) + "," + margin.top/2  + ")")
+                .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + margin.top/2  + ")")
                 .style("fill","black")
       
          ;
     });
 }
 
-function BarChartBasics() {
+function BarChartBasics_elementos() {
         
 		var margin = {top: 30, right: 50, bottom: 20, left: 10},
-		width = 500  - margin.left - margin.right,
+		width = 200  - margin.left - margin.right,
 	         height = 280 - margin.top - margin.bottom,
 		colorBar = d3.scale.category20(),
 		barPadding = 3
@@ -247,3 +249,4 @@ function max_lon_causa(datos_filtrados){
     
     
 }
+

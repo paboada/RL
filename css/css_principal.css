@@ -57,6 +57,12 @@ and open the template in the editor.
 	left:10px;
 }
 
+#bar_elementos {
+	position:absolute;
+	top:330px;
+	left:550px;
+}
+
 .slice {
    font-size: 12pt;
    font-family: Verdana;
