@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -41,8 +40,8 @@
                         fwee = d3.time.format("%a"),
                         fdat = d3.time.format("%d d"),
                         fmon = d3.time.format("%b")
-             
-        var archivo_pie = "../data/HistoricoPorcentual.csv";              
+                        ;               
+        var archivo_pie = "../data/HistoricoPorcentual_NSR.csv";
         dsPieChart(archivo_pie);        
         /*var seccion_integracion = "#barChart_proceso";
         var sub = "proceso";
@@ -50,26 +49,24 @@
         dsBarChart(seccion_integracion, sub, archivo);
         var seccion_integracion = "#barChart_integracion";
         var sub = "integracion";
-        dsBarChart(seccion_integracion, sub, archivo);*/  
-        var archivo_causas = "../data/Causales.csv";
-        bar_causas(archivo_causas);   
+        dsBarChart(seccion_integracion, sub, archivo);*/   
+        var archivo_causas = "../data/Causales_NSR.csv";
+        bar_causas(archivo_causas); 
         
-        var archivo_line_fijo = "../data/EvolucionCasosSemanales.csv";
+        var archivo_line_fijo = "../data/EvolucionCasosSemanales_NSR.csv";
         dsLineChart_fijo(archivo_line_fijo);
         
-        var archivo_line_din = "../data/EvolucionCasosCategoria.csv";
-        dsLineChart(archivo_line_din);        
+        var archivo_line_din = "../data/EvolucionCasosCategoria_NSR.csv";
+        dsLineChart(archivo_line_din);
         
-        var archivo_line_ele = "../data/Elementos.csv";
-        bar_elementos(archivo_line_ele); 
+        bar_elementos(); 
         
          
     </script>
     <div id="Controles">
-         <form class="Controles" action="../templates/ReporteNSR.html">
-                <input class="boton_area" type="submit" value="Ir a NSR">
-        </form>         
+         <form class="Controles" action="../templates/ReporteLogistica.html">
+                <input class="boton_area" type="submit" value="Ir a Logistica">
+        </form> 
     </div>
   </body>
-   
 </html>

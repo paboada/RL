@@ -120,3 +120,8 @@ and open the template in the editor.
 	/*font-style: italic;*/
 }
 
+#Controles{
+    position:absolute;
+	top:620px;
+	left:1210px;    
+}
