@@ -127,13 +127,16 @@ function dsPieChart(archivo_pie){
                            //console.log(x[0].value);
                            
 			                             
-                         
+                         var archivo = "../data/Causales.csv";
+                               var archivo_line = "../data/EvolucionCasosCategoria.csv";
+                                update_causas(d.data.category, color(i), archivo);
+                                updateLineChart(archivo_line,d.data.category, color(i)); 
                            
                            
                            var archivo2 = "../data/Elementos.csv";
                            update_causas_elementos(d.data.category, color(i), archivo2);
                            
-                           if(x[0].value == "Ir a Logistica"){ //Si estoy actualmente, no es por el clic
+                           /*if(x[0].value == "Ir a Logistica"){ //Si estoy actualmente, no es por el clic
                                //Archivos NSR
                                 var archivo3 = "../data/Causales_NSR.csv";
                                 update_causas(d.data.category, color(i), archivo3);
@@ -146,7 +149,7 @@ function dsPieChart(archivo_pie){
                                var archivo_line = "../data/EvolucionCasosCategoria.csv";
                                 update_causas(d.data.category, color(i), archivo);
                                 updateLineChart(archivo_line,d.data.category, color(i)); 
-                           }
+                           }*/
                            
 			 
 	}
