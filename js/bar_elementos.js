@@ -1,6 +1,6 @@
-function bar_elementos(){
+function bar_elementos(archivo_line_ele){
     //console.log("Comienza bar causas");
-     d3.csv("../data/Elementos.csv", function(datos){
+     d3.csv(archivo_line_ele, function(datos){
          console.log("Iniciando funcion bar_elementos");    
         var firstDatasetBarChart = datos;
         //console.log("Datos Cargados");
@@ -65,7 +65,7 @@ function bar_elementos(){
 	    .attr("y", function(d, i) { return (i * (height / firstDatasetBarChart_filter.length + barPadding)+ (height / firstDatasetBarChart_filter.length - barPadding));})
 	    .attr("class", "yAxis_elemento")
             .style("font-size", (height / firstDatasetBarChart_filter.length - barPadding))
-            .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + margin.top/2  + ")")
+            .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + (margin.top/2+barPadding)  + ")")
             .style("fill","black")
             
     ;
@@ -85,7 +85,7 @@ function bar_elementos(){
 		  .text(function(d) { return d.causa;})
                   .attr("x",0)
                   .attr("y", function(d, i) { return  (i * (height / firstDatasetBarChart_filter.length + barPadding)) + (height / firstDatasetBarChart_filter.length - barPadding);})
-		  .attr("transform", "translate(" + 0 + "," + margin.top/2 + ")")
+		  .attr("transform", "translate(" + 0 + "," + (margin.top/2+barPadding) + ")")
 		  .attr("class", "xaxis_elemento")
                   .style("font-size", "13px");	
           
@@ -192,7 +192,7 @@ function update_causas_elementos(group, colorChosen, archivo) {
              .text(function(d) { return d.causa;}) //a los nuevos elementos se debe actualizar todo, los viejos tienen los attr viejos pero los nuevos tienen por defecto
              .attr("x",0)
              .attr("y", function(d, i) { return  (i * (height / parseInt(data_causa.length) + barPadding)) + (height / parseInt(data_causa.length) - barPadding);})
-             .attr("transform", "translate(" + 0 + "," + margin.top/2 + ")")
+             .attr("transform", "translate(" + 0 + "," + (margin.top/2-barPadding) + ")")
              .style("font-size", "13px");
   
       //numeros de las barras
@@ -211,7 +211,7 @@ function update_causas_elementos(group, colorChosen, archivo) {
                 .attr("y", function(d, i) { return (i * (height / parseInt(data_causa.length) + barPadding)+ (height / parseInt(data_causa.length) - barPadding));})
                 .attr("class", "yAxis_elemento")
                 .style("font-size", (height / parseInt(data_causa.length) - barPadding))
-                .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + margin.top/2  + ")")
+                .attr("transform", "translate(" + letter_scale(max_long_palabra) + "," + (margin.top/2)  + ")")
                 .style("fill","black")
       
          ;

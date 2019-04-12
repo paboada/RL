@@ -1,5 +1,5 @@
-function dsLineChart_fijo() {
-    d3.csv("../data/EvolucionCasosSemanales.csv", function(datos) 
+function dsLineChart_fijo(archivo_line_fijo) {
+    d3.csv(archivo_line_fijo, function(datos) 
     {       
 	var firstDatasetLineChart = datos; 
         //console.log("firstDatasetLineChart");

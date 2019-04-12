@@ -1,7 +1,7 @@
 //by: Pablo Andres Boada Aragon. creado a partir de modificaciones de codigos usados en la comunidad d3js 
-function dsPieChart(){
+function dsPieChart(archivo_pie){
 
- d3.csv("../data/HistoricoPorcentual.csv", function(datos) 
+ d3.csv(archivo_pie, function(datos) 
     {
       
 	var dataset = datos;        
@@ -121,14 +121,32 @@ function dsPieChart(){
                            //var titulo = "Proceso";
                            //var sub = "proceso";
                             
-	                   //updateBarChart(d.data.category, color(i), seccion_integracion2, titulo, sub, archivo);                           
-			   updateLineChart(d.data.category, color(i));
+	                   //updateBarChart(d.data.category, color(i), seccion_integracion2, titulo, sub, archivo);  
                            
-                           //actualizar causas
-                           var archivo = "../data/Causales.csv";
-                           update_causas(d.data.category, color(i), archivo);
+                           var x = document.getElementsByClassName("boton_area");
+                           console.log(x[0].value);
+                           
+			                             
+                         
+                           
+                           
                            var archivo2 = "../data/Elementos.csv";
                            update_causas_elementos(d.data.category, color(i), archivo2);
+                           
+                           if(x[0].value == "Ir a Logistica"){ //Si estoy actualmente, no es por el clic
+                               //Archivos NSR
+                                var archivo3 = "../data/Causales_NSR.csv";
+                                update_causas(d.data.category, color(i), archivo3);
+                                var archivo_line2 = "../data/EvolucionCasosCategoria_NSR.csv";
+                                updateLineChart(archivo_line2,d.data.category, color(i));
+                                
+                           }else{
+                               //Archivos Logistica
+                               var archivo = "../data/Causales.csv";
+                               var archivo_line = "../data/EvolucionCasosCategoria.csv";
+                                update_causas(d.data.category, color(i), archivo);
+                                updateLineChart(archivo_line,d.data.category, color(i)); 
+                           }
                            
 			 
 	}

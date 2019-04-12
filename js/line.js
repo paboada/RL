@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function dsLineChart() {
+function dsLineChart(archivo_line_din) {
     
-    d3.csv("../data/EvolucionCasosCategoria.csv", function(datos)
+    d3.csv(archivo_line_din, function(datos)
     {    
        var datasetLineChart = datos;
        var group = "All";
@@ -144,9 +144,9 @@ function dsLineChartBasics() {
 
 
 /* updates bar chart on request */
-function updateLineChart(group, colorChosen) {
+function updateLineChart(archivo_line,group, colorChosen) {
     
-    d3.csv("../data/EvolucionCasosCategoria.csv", function(datos)
+    d3.csv(archivo_line, function(datos)
     { 
 	var currentDatasetLineChart = datasetLineChartChosen(group, datos);
         //console.log("Filtrados:");

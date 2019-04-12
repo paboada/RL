@@ -1,6 +1,6 @@
-function bar_causas(){
+function bar_causas(archivo_causas){
     //console.log("Comienza bar causas");
-     d3.csv("../data/Causales.csv", function(datos){
+     d3.csv(archivo_causas, function(datos){
          console.log("Iniciando funcion dsBarChart");    
         var firstDatasetBarChart = datos;
         //console.log("Datos Cargados");
@@ -171,6 +171,7 @@ function update_causas(group, colorChosen, archivo) {
               .duration(1000)
               .attr("width", function(d) {return(xScale(d.measure/7));})
               .attr("height",(height / parseInt(data_causa.length) - barPadding)) //los nuevos elementos no tienen estas propiedades, y los viejos son de los datos anteriores
+              .attr("transform", "translate(" + 0 + "," + 2.5 + ")")
               .attr("fill", colorChosen)
               ; 
         
@@ -189,7 +190,7 @@ function update_causas(group, colorChosen, archivo) {
              .text(function(d) { return d.causa;}) //a los nuevos elementos se debe actualizar todo, los viejos tienen los attr viejos pero los nuevos tienen por defecto
              .attr("x",0)
              .attr("y", function(d, i) { return  (i * (height / parseInt(data_causa.length) + barPadding)) + (height / parseInt(data_causa.length) - barPadding);})
-             .attr("transform", "translate(" + 0 + "," + margin.top/2 + ")")
+             .attr("transform", "translate(" + 0 + "," + (margin.top/2) + ")")
              .style("font-size", "13px");
   
       //numeros de las barras
@@ -209,10 +210,11 @@ function update_causas(group, colorChosen, archivo) {
                 .attr("y", function(d, i) { return (i * (height / parseInt(data_causa.length) + barPadding)+ (height / parseInt(data_causa.length) - barPadding));})
                 .attr("class", "yAxis_causa")
                 .style("font-size", (height / parseInt(data_causa.length) - barPadding))
-                .attr("transform", "translate(" + (letter_scale(max_long_palabra)) + "," + margin.top/2  + ")")
+                .attr("transform", "translate(" + (letter_scale(max_long_palabra)) + "," + ((margin.top-margin.bottom)+barPadding)  + ")")
                 .style("fill","black")
       
          ;
+         console.log("aca "+(height / parseInt(data_causa.length) - barPadding));
     });
 }
 
@@ -220,7 +222,7 @@ function BarChartBasics() {
         
 		var margin = {top: 30, right: 50, bottom: 20, left: 10},
 		width = 500  - margin.left - margin.right,
-	         height = 280 - margin.top - margin.bottom,
+	        height = 280 - margin.top - margin.bottom,
 		colorBar = d3.scale.category20(),
 		barPadding = 3
 		;
