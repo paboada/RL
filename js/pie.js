@@ -123,8 +123,8 @@ function dsPieChart(archivo_pie){
                             
 	                   //updateBarChart(d.data.category, color(i), seccion_integracion2, titulo, sub, archivo);  
                            
-                           var x = document.getElementsByClassName("boton_area");
-                           console.log(x[0].value);
+                           //var x = document.getElementsByClassName("boton_area");
+                           //console.log(x[0].value);
                            
 			                             
                          
